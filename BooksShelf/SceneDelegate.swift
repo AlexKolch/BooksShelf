@@ -15,11 +15,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Ловим уведомление о смене состояния приложения
         NotificationCenter.default.addObserver(self, selector: #selector(appStateChange(notify:)), name: .stateDidChange, object: nil)
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        guard let winScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: winScene)
+        window?.rootViewController = PreviewView()
+        window?.makeKeyAndVisible()
     }
 
     @objc func appStateChange(notify: Notification) {
+        guard let userInfo = notify.userInfo as? [String: AppState],
+              let newAppState = userInfo[.notifyInfo] else { return }
         
+        switch newAppState {
+        default:  self.window?.rootViewController = Builder.createRegistrationViewController()
+        }
     }
 
 }
