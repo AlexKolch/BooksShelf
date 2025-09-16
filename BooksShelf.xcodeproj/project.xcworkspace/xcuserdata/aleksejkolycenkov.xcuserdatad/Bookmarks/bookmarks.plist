@@ -12,13 +12,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>24</string>
+					<string>25</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>23</string>
+					<string>24</string>
 					<key>Timestamp</key>
-					<string>779557816.582247</string>
+					<string>779709402.0401779</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -34,16 +34,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+				<string>            NotificationCenter.default.post(name: .stateDidChange,
 </string>
 				<key>leading</key>
-				<string>        setupView()
-        
+				<string>        lottieView.translatesAutoresizingMaskIntoConstraints = false
+        lottieView.play(fromFrame: 0, toFrame: 115, loopMode: .playOnce) { completed in
 </string>
 				<key>trailing</key>
-				<string>            NotificationCenter.default.post(name: .stateDidChange,
-                                            object: nil,
+				<string>                                            object: nil,
                                             userInfo: [String.notifyInfo : AppState.registration])
+        }
 </string>
 			</dict>
 			<key>title</key>

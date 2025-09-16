@@ -10,26 +10,22 @@ import Lottie
 
 class PreviewView: UIViewController {
     
-    private let lottieView: LottieAnimationView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.loopMode = .loop
-        $0.play()
-        return $0
-    }(LottieAnimationView(name: "Book with bookmark"))
+    private let lottieView: LottieAnimationView = LottieAnimationView(name: "Book with bookmark")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        setupViews()
+    }
+    
+    private func setupViews() {
+        view.backgroundColor = .bgMain
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        lottieView.translatesAutoresizingMaskIntoConstraints = false
+        lottieView.play(fromFrame: 0, toFrame: 115, loopMode: .playOnce) { completed in
             NotificationCenter.default.post(name: .stateDidChange,
                                             object: nil,
                                             userInfo: [String.notifyInfo : AppState.registration])
         }
-    }
-    
-    private func setupView() {
-        view.backgroundColor = .bgMain
         view.addSubview(lottieView)
         
         NSLayoutConstraint.activate([
