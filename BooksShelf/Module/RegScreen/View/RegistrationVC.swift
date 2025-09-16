@@ -28,7 +28,7 @@ final class RegistrationVC: UIViewController, RegistVCProtocol {
     }
     
     private func configureContentView() -> UIHostingController<RegistrationView> {
-        let contentView = RegistrationView()
+        let contentView = RegistrationView(btnAction: {print($0)})
         let content = UIHostingController(rootView: contentView)
         addChild(content)
         view.addSubview(content.view)

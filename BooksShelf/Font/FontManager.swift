@@ -7,16 +7,15 @@
 
 import Foundation
 
-final class FontManager {
-    
+enum FontManager: String {
+   case regular = "Jost-Regular"
+    case thin = "JostRoman-Thin"
+    case extraLight = "JostRoman-ExtraLight"
+    case light = "JostRoman-Light"
+    case medium = "JostRoman-Medium"
+    case semiBold = "JostRoman-SemiBold"
+    case bold = "JostRoman-Bold"
+    case black = "JostRoman-Black"
 }
 
-//Jost-Regular"
-//"JostRoman-Thin"
-//"JostRoman-ExtraLight"
-//"JostRoman-Light"
-//"JostRoman-Medium"
-//"JostRoman-SemiBold"
-//"JostRoman-Bold"
-//"JostRoman-ExtraBold"
-//"JostRoman-Black"
+

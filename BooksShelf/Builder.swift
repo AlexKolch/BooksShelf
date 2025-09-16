@@ -14,7 +14,6 @@ protocol BaseViewProtocol: AnyObject {
 
 final class Builder {
     static private func create<T: UIViewController & BaseViewProtocol>(viewType: T.Type, presenter: (T) -> T.PresenterType) -> UIViewController {
-//        let view = T()
         let view = viewType.init() // создаем экземпляр из переданного типа Вью
         let presenter = presenter(view)
         view.presenter = presenter
