@@ -20,9 +20,13 @@ final class Builder {
         return view
     }
     
-    static func createRegistrationViewController() -> UIViewController {
+    static func createRegistrationVC() -> UIViewController {
         create(viewType: RegistrationVC.self) { view in
             RegistrationPresenter(view: view)
         }
+    }
+    
+    static func createOnboardingVC() -> UIViewController {
+        create(viewType: OnboardingVC.self) { OnboardingPresenter(view: $0) }
     }
 }

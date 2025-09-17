@@ -24,12 +24,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     @objc func appStateChange(notify: Notification) {
         guard let userInfo = notify.userInfo as? [String: AppState],
-              let newAppState = userInfo[.notifyInfo] else { return }
+              let appState = userInfo[.notifyInfo] else { return }
         
-        switch newAppState {
-        default:  self.window?.rootViewController = Builder.createRegistrationViewController()
+        switch appState {
+        case .registration: self.window?.rootViewController = Builder.createRegistrationVC()
+        case .onboarding: self.window?.rootViewController = Builder.createOnboardingVC()
+        case .main: print("main")
         }
     }
-
 }
 

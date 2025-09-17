@@ -10,8 +10,8 @@ import SwiftUI
 struct RegistrationView: View {
     @State private var nameField = ""
     
-    private var isActiveBtn: Bool { nameField.isEmpty ? true : false }
-    var btnAction: ((String) -> Void) //передадим сюда данные из TF в RegistrationVC
+    private var isActiveBtn: Bool { nameField.isEmpty ? false : true }
+    var btnAction: ((String) -> Void) //запишем сюда данные из TF для передачи в RegistrationVC
     
     var body: some View {
         ZStack {
@@ -28,23 +28,36 @@ struct RegistrationView: View {
                     .background(.tFbg)
                     .clipShape(.rect(cornerRadius: 10))
                 Spacer()
-                    Button {
+                OrangeButton(title: "Далее", isActive: isActiveBtn) {
+                    if isActiveBtn {
                         btnAction(nameField)
-                    } label: {
-                        Text("Далее")
-                            .padding(.vertical, 19)
-                            .frame(maxWidth: .infinity)
-                            .foregroundStyle(.white)
-                            .background(isActiveBtn ? Color.gray : .appOrange)
-                            .clipShape(.buttonBorder)
-                            .setFont(type: .bold, size: 14)
-                            .disabled(isActiveBtn)
-                    }                
+                    }
+                }
             }
             .padding(.horizontal, 30)
         }
         .background(.bgMain)
-       
+    }
+}
+
+struct OrangeButton: View {
+    let title: String
+    var isActive: Bool
+    let action: () -> Void
+    
+    var body: some View {
+        Button {
+            action()
+        } label: {
+            Text(title)
+                .padding(.vertical, 19)
+                .frame(maxWidth: .infinity)
+                .foregroundStyle(.white)
+                .background(isActive ? .appOrange : Color.gray)
+                .clipShape(.buttonBorder)
+                .setFont(type: .bold, size: 14)
+        }
+        .disabled(!isActive)
     }
 }
 

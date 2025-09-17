@@ -8,11 +8,9 @@
 import UIKit
 import SwiftUI
 
-protocol RegistVCProtocol: BaseViewProtocol {
-    
-}
+protocol RegistViewProtocol: BaseViewProtocol {}
 
-final class RegistrationVC: UIViewController, RegistVCProtocol {
+final class RegistrationVC: UIViewController, RegistViewProtocol {
     typealias PresenterType = RegistPresenterProtocol
     var presenter: PresenterType?
     private var contentView: UIHostingController<RegistrationView>!
@@ -28,7 +26,19 @@ final class RegistrationVC: UIViewController, RegistVCProtocol {
     }
     
     private func configureContentView() -> UIHostingController<RegistrationView> {
-        let contentView = RegistrationView(btnAction: {print($0)})
+        let contentView = RegistrationView { [weak self] name in
+            do {
+               try self?.presenter?.checkName(name)
+            } catch let error as RegistrationPresenter.RegistrationError {
+                let alert = UIAlertController(title: "Ошибка", message: error.rawValue, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self?.present(alert, animated: true)
+            }
+            catch {
+                print("неизвестная ошибка")
+            }
+        }
+        
         let content = UIHostingController(rootView: contentView)
         addChild(content)
         view.addSubview(content.view)

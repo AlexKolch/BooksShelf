@@ -8,7 +8,6 @@
 import Foundation
 
 enum AppState {
-    case preview
     case registration
     case onboarding
     case main

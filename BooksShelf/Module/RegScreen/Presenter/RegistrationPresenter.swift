@@ -8,16 +8,31 @@
 import Foundation
 
 protocol RegistPresenterProtocol: AnyObject {
-    init(view: any RegistVCProtocol)
+    func checkName(_ name: String) throws
+    init(view: any RegistViewProtocol)
 }
 
 final class RegistrationPresenter: RegistPresenterProtocol {
+    enum RegistrationError: String, Error {
+        case nameTooShort = "Имя пользователя должно быть не менее 2х символов"
+    }
     
-    weak var view: (any RegistVCProtocol)?
+    @Published var isRegistError = false
+    weak var view: (any RegistViewProtocol)?
     
-    init(view: any RegistVCProtocol) {
+    
+    init(view: any RegistViewProtocol) {
         self.view = view
     }
     
     
+    func checkName(_ name: String) throws(RegistrationError) {
+        if name.count >= 2 {
+            UserDefaults.standard.set(name, forKey: "name")
+            NotificationCenter.default.post(name: .stateDidChange, object: nil, userInfo: [String.notifyInfo: AppState.onboarding])
+        } else {
+            isRegistError = true
+            throw .nameTooShort
+        }
+    }
 }
