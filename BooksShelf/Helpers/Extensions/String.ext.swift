@@ -10,4 +10,6 @@ import Foundation
 extension String {
     /// userInfo KEY
     static let notifyInfo = "notifyInfo"
+    /// for UserDefaults KEY
+    static let appState = "state"
 }

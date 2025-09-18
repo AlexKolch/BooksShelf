@@ -23,7 +23,7 @@ final class OnboardingPresenter: OnboardingPresenterProtocol {
     }
     
     func startApp() {
-        //save state
+        UserDefaults.standard.set(AppState.main.rawValue, forKey: String.appState) 
         NotificationCenter.default.post(name: .stateDidChange, object: nil, userInfo: [String.notifyInfo: AppState.main])
     }
     

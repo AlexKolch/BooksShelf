@@ -11,6 +11,7 @@ import Lottie
 class PreviewView: UIViewController {
     
     private let lottieView: LottieAnimationView = LottieAnimationView(name: "Book with bookmark")
+    private var appState: AppState = .registration
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +21,16 @@ class PreviewView: UIViewController {
     private func setupViews() {
         view.backgroundColor = .bgMain
         
+        if let stateString = UserDefaults.standard.string(forKey: String.appState), let state = AppState(rawValue: stateString) {
+            appState = state
+        }
+        
         lottieView.translatesAutoresizingMaskIntoConstraints = false
-        lottieView.play(fromFrame: 0, toFrame: 115, loopMode: .playOnce) { completed in
+        lottieView.play(fromFrame: 0, toFrame: 115, loopMode: .playOnce) { [weak self] _ in
+            guard let self else { return }
             NotificationCenter.default.post(name: .stateDidChange,
                                             object: nil,
-                                            userInfo: [String.notifyInfo : AppState.registration])
+                                            userInfo: [String.notifyInfo : self.appState])
         }
         view.addSubview(lottieView)
         
@@ -35,6 +41,7 @@ class PreviewView: UIViewController {
                lottieView.heightAnchor.constraint(equalTo: lottieView.widthAnchor)
            ])
     }
+    
 }
 
 

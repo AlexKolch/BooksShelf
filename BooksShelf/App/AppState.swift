@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AppState {
+enum AppState: String {
     case registration
     case onboarding
     case main

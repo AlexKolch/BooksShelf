@@ -12,13 +12,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>25</string>
+					<string>31</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>24</string>
+					<string>30</string>
 					<key>Timestamp</key>
-					<string>779709402.0401779</string>
+					<string>779885764.514367</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -37,12 +37,12 @@
 				<string>            NotificationCenter.default.post(name: .stateDidChange,
 </string>
 				<key>leading</key>
-				<string>        lottieView.translatesAutoresizingMaskIntoConstraints = false
-        lottieView.play(fromFrame: 0, toFrame: 115, loopMode: .playOnce) { completed in
+				<string>        lottieView.play(fromFrame: 0, toFrame: 115, loopMode: .playOnce) { [weak self] _ in
+            guard let self else { return }
 </string>
 				<key>trailing</key>
 				<string>                                            object: nil,
-                                            userInfo: [String.notifyInfo : AppState.registration])
+                                            userInfo: [String.notifyInfo : self.appState])
         }
 </string>
 			</dict>

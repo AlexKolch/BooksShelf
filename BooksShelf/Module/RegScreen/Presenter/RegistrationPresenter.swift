@@ -29,6 +29,7 @@ final class RegistrationPresenter: RegistPresenterProtocol {
     func checkName(_ name: String) throws(RegistrationError) {
         if name.count >= 2 {
             UserDefaults.standard.set(name, forKey: "name")
+            UserDefaults.standard.set(AppState.onboarding.rawValue, forKey: String.appState)
             NotificationCenter.default.post(name: .stateDidChange, object: nil, userInfo: [String.notifyInfo: AppState.onboarding])
         } else {
             isRegistError = true
