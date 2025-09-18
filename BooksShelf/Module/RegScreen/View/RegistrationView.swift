@@ -20,13 +20,8 @@ struct RegistrationView: View {
                     .setFont(type: .black, size: 22)
                     .foregroundStyle(.white)
                 Spacer()
-                TextField("Ваше имя", text: $nameField)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 52)
+                BaseTF(placeholder: "Ваше имя", textField: $nameField)
                     .padding(.horizontal, 10)
-                    .foregroundStyle(.white)
-                    .background(.tFbg)
-                    .clipShape(.rect(cornerRadius: 10))
                 Spacer()
                 OrangeButton(title: "Далее", isActive: isActiveBtn) {
                     if isActiveBtn {
