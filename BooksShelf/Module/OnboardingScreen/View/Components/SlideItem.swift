@@ -10,7 +10,7 @@ import SwiftUI
 struct SlideItem: View {
     let tag: Int
     let item: OnboardingData
-    
+ 
     var body: some View {
         VStack(spacing: 10.0) {
             Image(item.image)

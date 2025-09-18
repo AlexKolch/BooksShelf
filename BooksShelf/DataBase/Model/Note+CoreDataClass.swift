@@ -28,5 +28,13 @@ extension Note {
 }
 
 extension Note : Identifiable {
-
+    func deleteNote() {
+        guard let managedObjectContext else { return }
+        managedObjectContext.delete(self)
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print("Error save context after delete note: \(error.localizedDescription)")
+        }
+    }
 }

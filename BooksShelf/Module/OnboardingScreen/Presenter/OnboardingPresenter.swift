@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import UIKit
 protocol OnboardingPresenterProtocol: AnyObject {
     var mockData: [OnboardingData] {get}
     init(view: any OnboardingViewProtocol)
