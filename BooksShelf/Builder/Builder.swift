@@ -29,4 +29,8 @@ final class Builder {
     static func createOnboardingVC() -> UIViewController {
         create(viewType: OnboardingVC.self) { OnboardingPresenter(view: $0) }
     }
+    
+    static func createMainVC() -> UIViewController {
+        create(viewType: MainVC.self) { MainPresenter(view: $0) }
+    }
 }

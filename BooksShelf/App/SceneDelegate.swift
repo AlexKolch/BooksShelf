@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let winScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: winScene)
-        window?.rootViewController = PreviewView()
+        window?.rootViewController = Builder.createOnboardingVC()//PreviewView()
         window?.makeKeyAndVisible()
     }
 
@@ -29,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         switch appState {
         case .registration: self.window?.rootViewController = Builder.createRegistrationVC()
         case .onboarding: self.window?.rootViewController = Builder.createOnboardingVC()
-        case .main: print("main")
+        case .main: self.window?.rootViewController = Builder.createMainVC()
         }
     }
 }
