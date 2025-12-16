@@ -33,4 +33,10 @@ final class Builder {
     static func createMainVC() -> UIViewController {
         create(viewType: MainVC.self) { MainPresenter(view: $0) }
     }
+    
+    static func createDetailsVC() -> UIViewController {
+        create(viewType: DetailsVC.self) { view in
+            DetailsPresenter(view: view)
+        }
+    }
 }
