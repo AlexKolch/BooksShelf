@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct DetailsView: View {
+    @State private var bookNote: String = ""
+    
     var body: some View {
         ZStack(alignment: .top) {
             // MARK: - Toolbar
@@ -36,9 +38,10 @@ struct DetailsView: View {
             .zIndex(1)
             .padding(.top, 55)
             .padding(.horizontal, 30)
+            
             ScrollView {
-                VStack {
-                   // MARK: - Header book
+                VStack(spacing: 29) {
+                    // MARK: - Header book
                     ZStack() {
                         //Background
                         GeometryReader { proxy in
@@ -53,6 +56,7 @@ struct DetailsView: View {
                                         Color.black.opacity(0.5).blendMode(.darken)
                                     })
                                     .offset(y: -minY) //чтобы прибить к верху
+                                    .clipped()
                         }
                         .frame(height: 400)
                         
@@ -74,12 +78,34 @@ struct DetailsView: View {
                         }
                         .padding(.top, 85)
                     }
-                    
-                    // MARK: - Description book
-                    VStack {
-                        
+                // MARK: - Description section
+                    VStack(alignment: .leading, spacing: 36) {
+                        // MARK: #1 Description
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Description")
+                                .setFont(type: .black, size: 18)
+                                .foregroundStyle(.white)
+                            Text("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo")
+                                .setFont(size: 14)
+                                .foregroundStyle(.appGray)
+                        }
+                        // MARK: #2 Notes
+                        VStack(alignment: .leading, spacing: 14) {
+                            Text("Book's notes")
+                                .setFont(type: .bold, size: 18)
+                                .foregroundStyle(.white)
+                            
+                            VStack(alignment: .leading, spacing: 14) {
+                               NoteView()
+                                NoteView()
+                         
+                            }
+                            BaseTF(placeholder: "Add note", textField: $bookNote)
+                        }
                     }
+                    .padding(.horizontal, 30)
                 }
+                .padding(.bottom, 30)
             }
         }
         .ignoresSafeArea()
@@ -91,43 +117,5 @@ struct DetailsView: View {
     DetailsView()
 }
 
-struct BookStatusBtn: View {
-    let status: BookStatus
-    let action: () -> Void
-    
-    private var btnText: String {
-        switch status {
-        case .inProcess:
-            return "In Process"
-        case .done:
-            return "Done"
-        case .inFuture:
-            return "Going read"
-        }
-    }
-    
-    var body: some View {
-        Button {
-            action()
-        } label: {
-            Text(btnText)
-                .padding(.vertical, 3)
-                .padding(.horizontal, 18)
-                .setFont(type: .bold, size: 14)
-                .foregroundStyle(.white)
-                .background(getColor())
-                .clipShape(Capsule())
-        }
-    }
-    
-    private func getColor() -> Color {
-        switch status {
-        case .inProcess:
-            return .readingNow
-        case .done:
-            return .read
-        case .inFuture:
-            return .willRead
-        }
-    }
-}
+
+

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol DetailsViewProtocol: AnyObject, BaseViewProtocol {
     
@@ -14,11 +15,13 @@ protocol DetailsViewProtocol: AnyObject, BaseViewProtocol {
 final class DetailsVC: UIViewController, DetailsViewProtocol {
     typealias PresenterType = DetailsPresenterProtocol
     var presenter: PresenterType?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-     
+        
+        let contentView = DetailsView()
+        let contentVC = UIHostingController(rootView: contentView)
+        self.add(contentVC)
     }
     
 
