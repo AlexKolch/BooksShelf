@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-protocol DetailsViewProtocol: AnyObject, BaseViewProtocol {
+protocol DetailsViewProtocol: BaseViewProtocol {
     
 }
 
