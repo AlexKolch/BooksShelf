@@ -48,9 +48,9 @@ final class Builder {
         }
     }
     
-    static func createBooksListVC() -> UIViewController {
+    static func createBooksListVC(books: [DtoBook]?) -> UIViewController {
         self.create(viewType: BooksListVC.self) { view in
-            BooksListPresenter(view: view)
+            BooksListPresenter(view: view, books: books)
         }
     }
     

@@ -8,18 +8,23 @@
 import SwiftUI
 
 struct AddBookView: View {
+    enum Route {
+        case forward(String)
+        case back
+    }
     @State private var bookName = ""
+    var routeHandler: ((Route) -> Void)
     
     var body: some View {
         VStack {
             AppToolbar(title: "Add Book") {
-                //to do
+               routeHandler(.back)
             }
             Spacer()
             BaseTF(placeholder: "title book", textField: $bookName)
             Spacer()
             OrangeButton(title: "Next") {
-                //to do
+                routeHandler(.forward(bookName))
             }
         }
         .padding(.horizontal, 20)
@@ -27,9 +32,6 @@ struct AddBookView: View {
     }
 }
 
-#Preview {
-    AddBookView()
-}
 
 
 

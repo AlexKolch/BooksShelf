@@ -20,7 +20,7 @@ final class BooksListVC: UIViewController, BooksListViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let contentView = BookListView()
+        let contentView = BookListView(booksList: presenter?.booksList ?? [])
         let contentVC = UIHostingController(rootView: contentView)
         self.add(contentVC)
     }

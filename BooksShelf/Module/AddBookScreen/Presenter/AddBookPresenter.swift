@@ -11,13 +11,29 @@ import Foundation
 // to allow weak references. Assuming this is declared elsewhere.
 
 protocol AddBookPresenterProtocol: AnyObject {
-    
+    func search(by title: String)
 }
 
 final class AddBookPresenter: AddBookPresenterProtocol {
     weak var view: (any AddBookViewProtocol)?
+    private let repository: NetworkService
     
-    init(view: any AddBookViewProtocol) {
+    init(view: any AddBookViewProtocol, repository: NetworkService = BookRepository()) {
         self.view = view
+        self.repository = repository
+    }
+    
+    func search(by title: String) {
+        repository.get(by: title) { [weak self] res in
+            switch res {
+            case .success(let success):
+                DispatchQueue.main.async {
+//                    self?.view?.goToBooksList(books: success)
+                    self?.view?.routeForward(success)
+                }
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
     }
 }

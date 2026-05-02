@@ -7,6 +7,8 @@
 import SwiftUI
 
 struct BookListView: View {
+    let booksList: [DtoBook]
+    
     var body: some View {
         ZStack(alignment: .top) {
             AppToolbar(title: "Author") {
@@ -20,9 +22,12 @@ struct BookListView: View {
                         .padding(.horizontal, 21)
                     
                     VStack(spacing: 23) {
-                        BookCell {
-                            
+                        ForEach(booksList, id: \.self) { book in
+                            BookCell {
+                                
+                            }
                         }
+                       
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -34,11 +39,12 @@ struct BookListView: View {
     }
 }
 
-#Preview {
-    BookListView()
-}
+//#Preview {
+//    BookListView()
+//}
 
 struct BookCell: View {
+   let book: DtoBook
    let tapHandler: () -> Void
     
     var body: some View {
