@@ -8,30 +8,29 @@
 import SwiftUI
 
 struct AddBookView: View {
+    @State private var bookName = ""
+    
     var body: some View {
         VStack {
-            HStack {
-                Button {
-                    
-                } label: {
-                    Image(systemName: "arrow.left")
-                        .foregroundStyle(.white)
-                        .font(.title)
-                }
-                Spacer()
-                Text("About book")
-                    .setFont(type: .semiBold, size: 20)
-                    .foregroundStyle(.white)
-                Spacer()
-                Rectangle()
-                    .opacity(0)
-                    .frame(width: 20, height: 20)
+            AppToolbar(title: "Add Book") {
+                //to do
+            }
+            Spacer()
+            BaseTF(placeholder: "title book", textField: $bookName)
+            Spacer()
+            OrangeButton(title: "Next") {
+                //to do
             }
         }
-        .background(Color.bgMain)
+        .frame(width: .infinity, alignment: .top)
+        .padding(.horizontal, 20)
+        .background(.bgMain)
     }
 }
 
 #Preview {
     AddBookView()
 }
+
+
+

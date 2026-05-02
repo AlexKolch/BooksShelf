@@ -37,7 +37,7 @@ struct RegistrationView: View {
 
 struct OrangeButton: View {
     let title: String
-    var isActive: Bool
+    var isActive: Bool = true
     let action: () -> Void
     
     var body: some View {

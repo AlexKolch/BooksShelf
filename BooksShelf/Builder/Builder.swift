@@ -52,4 +52,10 @@ final class Builder {
             BooksListPresenter(view: view)
         }
     }
+    
+    static func createAddBookDetailsVC() -> UIViewController {
+        self.create(viewType: AddBookDetailsVC.self) { view in
+            AddBookDetailsPresenter(view: view)
+        }
+    }
 }

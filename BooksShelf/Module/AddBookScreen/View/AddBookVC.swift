@@ -11,7 +11,7 @@ protocol AddBookViewProtocol: BaseViewProtocol {
     
 }
 
-class AddBookVC: UIViewController, AddBookViewProtocol {
+final class AddBookVC: UIViewController, AddBookViewProtocol {
     typealias PresenterType = AddBookPresenterProtocol
     
     var presenter: (any PresenterType)?

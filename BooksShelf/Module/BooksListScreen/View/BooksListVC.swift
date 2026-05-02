@@ -11,7 +11,7 @@ protocol BooksListViewProtocol: BaseViewProtocol {
     
 }
 
-class BooksListVC: UIViewController, BooksListViewProtocol {
+final class BooksListVC: UIViewController, BooksListViewProtocol {
     typealias PresenterType = BooksListPresenterProtocol
     
     var presenter: (any PresenterType)?
