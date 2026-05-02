@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol AddBookViewProtocol: BaseViewProtocol {
     
@@ -19,7 +20,9 @@ final class AddBookVC: UIViewController, AddBookViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let contentView = AddBookView()
+        let contentVC = UIHostingController(rootView: contentView)
+        self.add(contentVC)
     }
     
 

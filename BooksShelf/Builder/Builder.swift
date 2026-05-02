@@ -32,7 +32,8 @@ final class Builder {
     }
     
     static func createMainVC() -> UIViewController {
-        create(viewType: MainVC.self) { MainPresenter(view: $0) }
+       let mainVC = create(viewType: MainVC.self) { MainPresenter(view: $0) }
+        return UINavigationController(rootViewController: mainVC)
     }
     
     static func createDetailsVC() -> UIViewController {
@@ -41,7 +42,7 @@ final class Builder {
         }
     }
     
-    static func createAddVC() -> UIViewController {
+    static func createAddBookVC() -> UIViewController {
         self.create(viewType: AddBookVC.self) { view in
             AddBookPresenter(view: view)
         }

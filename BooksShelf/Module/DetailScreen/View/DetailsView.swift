@@ -9,6 +9,11 @@ import SwiftUI
 
 struct DetailsView: View {
     @State private var bookNote: String = ""
+    @State private var offsetTop: CGFloat = 0.0
+    @State private var commentDeleteOffsetX: CGFloat = 0.0
+    @State private var showTitleBook = false
+    
+    let bookName: String = "War and Peace"
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -22,7 +27,7 @@ struct DetailsView: View {
                         .font(.title)
                 }
                 Spacer()
-                Text("About book")
+                Text(showTitleBook ? bookName : "About book")
                     .setFont(type: .semiBold, size: 20)
                     .foregroundStyle(.white)
                 Spacer()
@@ -37,12 +42,16 @@ struct DetailsView: View {
             }
             .zIndex(1)
             .padding(.top, 55)
+            .padding(.bottom, 10)
             .padding(.horizontal, 30)
+            .background(
+                .bgMain.opacity(offsetTop < 0 ? (-offsetTop * 5.5 / 500) : 0)
+            )
             
             ScrollView {
                 VStack(spacing: 29) {
                     // MARK: - Header book
-                    ZStack() {
+                    ZStack(alignment: .top) {
                         //Background
                         GeometryReader { proxy in
                             let minY = proxy.frame(in: .global).minY
@@ -50,13 +59,23 @@ struct DetailsView: View {
                                     .resizable()
                                     .scaledToFill()
                                     .frame(maxWidth: proxy.size.width) //лучше ограничить так, шириной экрана
-                                    .frame(height: 410 + (minY > 0 ? minY : 0))
+                                    .frame(height: 400 + (minY > 0 ? minY : 0))
                                     .clipped()
                                     .overlay(content: {
                                         Color.black.opacity(0.5).blendMode(.darken)
                                     })
-                                    .offset(y: -minY) //чтобы прибить к верху
-                                    .clipped()
+                                    .offset(y: minY > 0 ? -minY : 0) //чтобы прибить к верху
+                                    .onChange(of: minY) { _, newValue in
+                                        offsetTop = newValue
+                                        
+                                        withAnimation {
+                                            if newValue < -150 {
+                                                showTitleBook = true
+                                            } else {
+                                                showTitleBook = false
+                                            }
+                                        }
+                                    }
                         }
                         .frame(height: 400)
                         
@@ -96,9 +115,44 @@ struct DetailsView: View {
                                 .foregroundStyle(.white)
                             
                             VStack(alignment: .leading, spacing: 14) {
-                               NoteView()
+                                ZStack(alignment: .trailing) {
+                                    NoteView()
+                                        .zIndex(1)
+                                        .offset(x: -commentDeleteOffsetX)
+                                        .gesture(
+                                            DragGesture()
+                                                .onChanged({ value in
+                                                    if value.translation.width < -commentDeleteOffsetX {
+                                                        commentDeleteOffsetX = abs(value.translation.width)
+                                                    }
+                                                })
+                                                .onEnded({ value in
+                                                    withAnimation {
+                                                        if value.translation.width < -100 {
+                                                            commentDeleteOffsetX = 150
+                                                        } else {
+                                                            commentDeleteOffsetX = 0
+                                                        }
+                                                    }
+                                                    
+                                                })
+                                        )
+                                    
+                                    Button {
+                                        //
+                                    } label: {
+                                        Image(systemName: "trash")
+                                            .resizable()
+                                            .frame(width: 24, height: 24)
+                                            .foregroundStyle(.white)
+                                        //чтобы плавно появлялся
+                                            .opacity(commentDeleteOffsetX > 0 ? (commentDeleteOffsetX / 100) : 0)
+                                            .padding(.trailing, 20)
+                                    }
+
+                                }
                                 NoteView()
-                         
+                                
                             }
                             BaseTF(placeholder: "Add note", textField: $bookNote)
                         }

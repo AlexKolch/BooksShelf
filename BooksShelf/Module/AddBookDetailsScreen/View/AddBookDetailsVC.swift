@@ -19,12 +19,11 @@ final class AddBookDetailsVC: UIViewController, AddBookDetailsVCProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let viewContent = AddBookDetailsView()
         
-        let content = UIHostingController(rootView: viewContent)
-        addChild(content)
-        view.addSubview(content.view)
-        content.didMove(toParent: self)
+        let contentView = AddBookDetailsView()
+        let contentVC = UIHostingController(rootView: contentView)
+        self.add(contentVC)
+        
     }
     
 

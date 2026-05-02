@@ -20,6 +20,7 @@ struct NoteView: View {
         .padding(.vertical, 12)
         .padding(.horizontal, 21)
         .background(.tFbg)
+        .clipShape(.rect(cornerRadius: 10))
     }
 }
 

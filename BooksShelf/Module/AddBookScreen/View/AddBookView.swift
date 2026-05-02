@@ -22,7 +22,6 @@ struct AddBookView: View {
                 //to do
             }
         }
-        .frame(width: .infinity, alignment: .top)
         .padding(.horizontal, 20)
         .background(.bgMain)
     }

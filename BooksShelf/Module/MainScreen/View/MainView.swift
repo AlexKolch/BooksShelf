@@ -12,10 +12,11 @@ struct MainView: View {
         case willRead
         case read
     }
-    
-    let name: String
     @State private var searchFieldText: String = ""
     @State private var selectedCategory: SelectedCategory = .willRead
+    
+    let name: String
+    var routingHandler: ((Book?) -> Void)
     
     var body: some View {
         VStack(spacing: 0.0) {
@@ -30,7 +31,7 @@ struct MainView: View {
                     }
                     Spacer()
                     Button {
-                        //
+                        routingHandler(nil)
                     } label: {
                         HStack(spacing: 10.0) {
                             Image(systemName: "book.closed.fill")
@@ -116,7 +117,9 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView(name: "Алексей")
+    MainView(name: "Алексей") { _ in
+        
+    }
 }
 
 
