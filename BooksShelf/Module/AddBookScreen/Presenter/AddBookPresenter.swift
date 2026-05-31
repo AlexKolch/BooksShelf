@@ -28,7 +28,6 @@ final class AddBookPresenter: AddBookPresenterProtocol {
             switch res {
             case .success(let success):
                 DispatchQueue.main.async {
-//                    self?.view?.goToBooksList(books: success)
                     self?.view?.routeForward(success)
                 }
             case .failure(let err):

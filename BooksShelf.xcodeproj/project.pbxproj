@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FCA0ABA52E7306F20033561F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FCA0ABA42E7306F20033561F /* Lottie */; };
+		FCC4B3982FA913D200432176 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = FCC4B3972FA913D200432176 /* SDWebImageSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCC4B3982FA913D200432176 /* SDWebImageSwiftUI in Frameworks */,
 				FCA0ABA52E7306F20033561F /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +86,7 @@
 			name = BooksShelf;
 			packageProductDependencies = (
 				FCA0ABA42E7306F20033561F /* Lottie */,
+				FCC4B3972FA913D200432176 /* SDWebImageSwiftUI */,
 			);
 			productName = BooksShelf;
 			productReference = FCA0AB882E72F1CC0033561F /* BooksShelf.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				FCA0ABA32E7306F20033561F /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				FCC4B3962FA913D200432176 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FCA0AB892E72F1CC0033561F /* Products */;
@@ -366,6 +370,14 @@
 				minimumVersion = 4.5.2;
 			};
 		};
+		FCC4B3962FA913D200432176 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -373,6 +385,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FCA0ABA32E7306F20033561F /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		FCC4B3972FA913D200432176 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FCC4B3962FA913D200432176 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

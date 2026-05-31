@@ -8,24 +8,35 @@
 import SwiftUI
 
 struct AddBookDetailsView: View {
+//    enum Route {
+//        case addBook, back
+//    }
     @State private var bookName: String = ""
-    @State private var textDescrption: String = ""
+    @State private var bookDescrption: String = ""
     @State private var isShowPlaceholder: Bool = true
+//    var routeHandler: (Route) -> Void
+    var book: DtoBook?
+    weak var delegate: AddBookDetailsDelegate?
+    
+    init(book: DtoBook? = nil, delegate: AddBookDetailsDelegate? = nil) {
+        self.book = book
+        self._bookName = .init(initialValue: book?.title ?? "")
+        self.delegate = delegate
+//        self.routeHandler = routeHandler
+    }
     
     var body: some View {
         VStack {
-            AppToolbar(title: "Title") {
-                //
+            AppToolbar(title: book?.title ?? "") {
+//                routeHandler(.back)
+                delegate?.back()
             }
-            VStack(spacing:80) {
-                Image(.cover)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 190)
-                    .clipShape(.rect(cornerRadius: 5))
+            VStack(spacing: 80) {
+                BookCover(coverId: book?.coverI?.description)
+                    .frame(width: 130, height: 180)
                     .overlay(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
                         Button {
-                            //
+                           // delegate?.createBook()
                         } label: {
                             ZStack {
                                 Circle()
@@ -37,14 +48,14 @@ struct AddBookDetailsView: View {
                                     .foregroundStyle(.white)
                             }
                         }
-                        .offset(x: 12, y: -12)
+                        .offset(x: 6, y: -6)
                     }
                 
             
                 VStack(spacing: 30) {
                     BaseTF(placeholder: "Title", textField: $bookName)
                     ZStack(alignment: .topLeading) {
-                        TextEditor(text: $textDescrption)
+                        TextEditor(text: $bookDescrption)
                             .scrollContentBackground(.hidden)
                             .frame(height: 114)
                             .padding(.horizontal, 15)
@@ -54,7 +65,11 @@ struct AddBookDetailsView: View {
                             .clipShape(.rect(cornerRadius: 10))
                             .overlay(alignment: .topTrailing, content: {
                                 Button {
-                                    //
+                                    delegate?.createDescrBook(title: bookName) { desrp in
+                                        DispatchQueue.main.async {
+                                            self.bookDescrption = desrp
+                                        }
+                                    }
                                 } label: {
                                     Image(.AI)
                                         .resizable()
@@ -66,7 +81,7 @@ struct AddBookDetailsView: View {
                                         .clipped()
                                 }
                             })
-                            .onChange(of: textDescrption) { _, newValue in
+                            .onChange(of: bookDescrption) { _, newValue in
                                 if !newValue.isEmpty {
                                    isShowPlaceholder = false
                                 } else {
@@ -84,7 +99,8 @@ struct AddBookDetailsView: View {
             }
             Spacer()
             OrangeButton(title: "Add") {
-                //
+//                routeHandler(.addBook)
+                delegate?.saveBook()
             }
         }
         .padding(.horizontal, 20)

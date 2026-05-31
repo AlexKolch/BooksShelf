@@ -20,7 +20,7 @@ final class AddBookVC: UIViewController, AddBookViewProtocol {
 //    }
     
    lazy var routeForward: (([DtoBook]) -> Void) = { [weak self] books in
-        let vc = Builder.createBooksListVC(books: books)
+       let vc = Builder.createBooksListVC(books: books)
        self?.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -41,11 +41,9 @@ final class AddBookVC: UIViewController, AddBookViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         let contentView = AddBookView(routeHandler: routingHandler)
         let contentVC = UIHostingController(rootView: contentView)
         self.add(contentVC)
     }
     
-
 }

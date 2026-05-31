@@ -5,14 +5,16 @@
 //  Created by Алексей Колыченков on 01.05.2026.
 //
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct BookListView: View {
     let booksList: [DtoBook]
+    var cellTapped: (DtoBook?) -> Void
     
     var body: some View {
         ZStack(alignment: .top) {
-            AppToolbar(title: "Author") {
-                //
+            AppToolbar(title: "Add book") {
+                cellTapped(nil)
             }
             ScrollView {
                 VStack(alignment: .leading, spacing: 30) {
@@ -23,11 +25,10 @@ struct BookListView: View {
                     
                     VStack(spacing: 23) {
                         ForEach(booksList, id: \.self) { book in
-                            BookCell {
-                                
+                            BookCell(book: book) {
+                                cellTapped(book)
                             }
                         }
-                       
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -52,16 +53,13 @@ struct BookCell: View {
             tapHandler()
         } label: {
             HStack(alignment: .top, spacing: 16) {
-                Image(.cover)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 130)
-                
+                BookCover(coverId: book.coverI?.description)
+                    .frame(width: 80, height: 120)
                 VStack(alignment: .leading) {
-                    Text("Book title")
+                    Text(book.title)
                         .foregroundStyle(.white)
                         .setFont(type: .black, size: 16)
-                    Text("Author name")
+                    Text(book.authorName?.first ?? "n/a")
                         .foregroundStyle(.appGray)
                         .setFont(type: .medium, size: 14)
                 }
@@ -72,5 +70,26 @@ struct BookCell: View {
                     .padding(.top, 10)
             }
         }
+    }
+}
+
+
+struct BookCover: View {
+    
+    var coverId: String?
+    
+    var body: some View {
+         if let coverId, let url = URL(string: "https://covers.openlibrary.org/b/id/\(coverId)-M.jpg") {
+            WebImage(url: url)
+                 .resizable()
+                 .scaledToFit()
+//                 .frame(width: 100, height: 130)
+         } else {
+             Image(systemName: "book.closed")
+                 .resizable()
+                 .foregroundStyle(.white)
+                 .scaledToFill()
+//                 .frame(width: 70, height: 90)
+         }
     }
 }
