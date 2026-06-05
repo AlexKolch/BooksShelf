@@ -54,7 +54,7 @@ final class GigaChat {
     private func getAccessToken(_ completion: @escaping (Result<GigaChatTokenResponse, Error>) -> Void) {
         print("Запрашиваем новый токен")
         let urlString = "https://ngw.devices.sberbank.ru:9443/api/v2/oauth"
-        let authKey = "MDE5ZTdkNzktYTJlNS03M2IzLWIyYTQtMDgzMmRmNDdlNGJlOjJhNjU0MDY2LWM2ZmYtNDE4My1hYmVkLTAyNDRjZmM4YzMwZQ=="
+        let authKey = ""
         guard let url = URL(string: urlString) else { return }
         
         var req = URLRequest(url: url)
