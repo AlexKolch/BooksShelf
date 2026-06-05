@@ -10,6 +10,7 @@ In developing.
 * CoreData
 * FileManager
 * MVP Architecture
+* GigaChat API
 * Lottie animations
 
 ---
@@ -17,3 +18,5 @@ In developing.
 ![Image alt](https://github.com/AlexKolch/BooksShelf/blob/main/Screen/Simulator-2.jpg)
 ![Image alt](https://github.com/AlexKolch/BooksShelf/blob/main/Screen/Simulator-3.jpg)
 ![Image alt](https://github.com/AlexKolch/BooksShelf/blob/main/Screen/Simulator-4.jpg)
+![Image alt](https://github.com/AlexKolch/BooksShelf/blob/main/Screen/Simulator-5.jpg)
+![Image alt](https://github.com/AlexKolch/BooksShelf/blob/main/Screen/Simulator-6.jpg)
